@@ -10,7 +10,7 @@
 - rejected： 意味着操作失败
 
 ## Promise 状态的改变
-- pending → resolved
+- pending → fulfilled
 - pending → rejected
 
 ## Promise 基本使用

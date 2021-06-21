@@ -125,3 +125,20 @@ Function.prototype.myBind = function (context) {
 - XSS 攻击是指攻击者在网站中插入可执行代码，防范方法是对脚本标签进行识别过滤
 
 - CSRF攻击是指跨站请请求伪造，目前防御 CSRF 攻击主要有三种策略：验证 HTTP Referer 字段；在请求地址中添加 token 并验证；在 HTTP 头中自定义属性并验证。
+
+
+## 按位与、按位或、按位异或
+- 8 & 7
+- 8 | 7
+- 8 ^ 7
+
+### 不用四则运算求和
+```js
+ function sum(a, b) {
+    if (a === 0) return b;
+    if (b === 0) return a;
+    let newA = a ^ b;
+    let newB = (a & b) << 1;
+    return sum(newA, newB);
+ }
+```

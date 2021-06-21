@@ -39,6 +39,7 @@ window.addEventListener('load', () => {
 
             this.draw();
         }
+        this.draw();
     }
 
     const circleArray = [];

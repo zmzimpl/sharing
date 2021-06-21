@@ -54,3 +54,74 @@
 
 leetcode Hot 100
 剑指Offer 60多道算法
+
+
+
+## 如何监听dom 节点的变化
+使用 MutationObserver 可以实现
+
+## call, apply, bind 的区别，应用场景？
+- call, apply 是用于改变函数的上下文，在被调用时就会执行函数
+- bind 返回一个改变了上下文之后的函数
+
+### call 和 apply 的区别？
+主要是传参方式不同，call是传递多个参数， apply 则是第二个参数传递一个数组
+
+### 手写 call
+```js
+Function.prototype.myCall = function(context) {
+    if (typeof this !== 'Function') {
+        thrown new TypeError('Error');
+    }
+    context = context || window;
+    context.fn = this;
+    const args = [...arguments].slice(1);
+    const rs = context.fn(...args);
+    delete context.fn;
+    return rs;
+}
+```
+
+### 手写 apply
+```js
+Function.prototype.myApply = function(context) {
+    if (typeof this !== 'Function') {
+        throw new TypeError('Error');
+    }
+    context = context || window;
+    context.fn = this;
+    let rs = null;
+    if (arguments[1]) {
+        rs = context.fn(...arguments[1]);
+    } else {
+        rs = context.fn();
+    }
+    delete context.fn;
+    return rs;
+}
+```
+
+### 手写bind
+```js
+Function.prototype.myBind = function (context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  const _this = this
+  const args = [...arguments].slice(1)
+  // 返回一个函数
+  return function F() {
+    // 因为返回了一个函数，我们可以 new F()，所以需要判断
+    if (this instanceof F) {
+      return new _this(...args, ...arguments)
+    }
+    return _this.apply(context, args.concat(...arguments))
+  }
+}
+```
+
+## XSS 攻击 和 CSRF 攻击
+
+- XSS 攻击是指攻击者在网站中插入可执行代码，防范方法是对脚本标签进行识别过滤
+
+- CSRF攻击是指跨站请请求伪造，目前防御 CSRF 攻击主要有三种策略：验证 HTTP Referer 字段；在请求地址中添加 token 并验证；在 HTTP 头中自定义属性并验证。

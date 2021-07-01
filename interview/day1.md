@@ -142,3 +142,11 @@ Function.prototype.myBind = function (context) {
     return sum(newA, newB);
  }
 ```
+
+### Typescript 中的 typeof 和 keyof
+
+
+### Typescript 的 Pick
+
+
+### HTTPS 的缓存（强缓存、协议缓存）

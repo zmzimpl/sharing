@@ -7,11 +7,6 @@ window.addEventListener('load', () => {
     canvas.height = window.innerHeight - 8;
     canvas.width = window.innerWidth - 6;
 
-    // ctx.beginPath();
-    // ctx.arc(200, 200, 25, 0, Math.PI * 2, true);
-    // ctx.closePath();
-    // ctx.strokeStyle = 'blue';
-    // ctx.stroke();
 
     function Circle(x, y, dx, dy, radius) {
         this.x = x;
@@ -60,19 +55,6 @@ window.addEventListener('load', () => {
             const circle = circleArray[index];
             circle.update();
         }
-        // ctx.beginPath();
-        // ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-        // ctx.strokeStyle = 'blue';
-        // ctx.stroke();
-        // if (x + radius > (innerWidth - 8) || x - radius < 0) {
-        //     dx = -dx;
-        // }
-        // x +=dx;
-
-        // if (y + radius > (innerHeight - 8) || y - radius < 0) {
-        //     dy = -dy;
-        // }
-        // y +=dy;
     }
     animation();
 });

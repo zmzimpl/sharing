@@ -146,7 +146,14 @@ Function.prototype.myBind = function (context) {
 ### Typescript 中的 typeof 和 keyof
 
 
-### Typescript 的 Pick
+### Typescript 的 , , , , ，并集
 
+- Omit<> 省略
+- Pick<> 子集
+- Partial<> 可选
+- Required<> 必填
+- ReadOnly<> 只读
+- 交叉类型 T & K
+- 联合类型 T | K
 
 ### HTTPS 的缓存（强缓存、协议缓存）

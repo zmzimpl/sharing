@@ -145,6 +145,21 @@ Function.prototype.myBind = function (context) {
 
 ### Typescript 中的 typeof 和 keyof
 
+```
+export interface User {
+  name: string;
+  age: number;
+}
+const user: User = {
+  name: 'zhangsan',
+  age: 11
+}
+type UserKeys = keyof typeof user;
+
+let userKeys: UserKeys = 'age';
+
+```
+
 
 ### Typescript 的 , , , , ，并集
 
@@ -155,5 +170,7 @@ Function.prototype.myBind = function (context) {
 - ReadOnly<> 只读
 - 交叉类型 T & K
 - 联合类型 T | K
+- Extract<>
+- Exclude<>
 
 ### HTTPS 的缓存（强缓存、协议缓存）

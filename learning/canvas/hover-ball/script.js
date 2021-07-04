@@ -8,6 +8,16 @@ window.addEventListener('load', () => {
     canvas.height = window.innerHeight - 8;
     canvas.width = window.innerWidth - 6;
 
+    const mouse = {
+        x: 0,
+        y: 0
+    }
+
+    window.addEventListener('mousemove', (evt) => {
+        mouse.x = evt.x;
+        mouse.y = evt.y;
+    });
+
 
     function Circle(x, y, dx, dy, radius, color) {
         this.x = x;
@@ -16,7 +26,7 @@ window.addEventListener('load', () => {
         this.dy = dy;
         this.radius = radius;
 
-        this.draw = function() {
+        this.draw = function () {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             ctx.strokeStyle = color;
@@ -25,7 +35,7 @@ window.addEventListener('load', () => {
             ctx.fill();
         }
 
-        this.update = function() {
+        this.update = function () {
             if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
                 this.dx = -this.dx;
             }
@@ -35,18 +45,26 @@ window.addEventListener('load', () => {
             }
             this.y += this.dy;
 
+            if (mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+                mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+                if (this.radius < 40) {
+                    this.radius += 2;
+                }
+            } else if (this.radius > 3) {
+                this.radius -= 2;
+            }
             this.draw();
         }
         this.draw();
     }
 
     const circleArray = [];
-    for (let index = 0; index < 100; index++) {
-        let radius = 30;
+    for (let index = 0; index < 2000; index++) {
+        let radius = Math.random() * 5 + 1;
         let x = Math.random() * (innerWidth - radius * 2) + radius;
         let y = Math.random() * (innerHeight - radius * 2) + radius;
-        let dx = (Math.random() - 0.5) * 8;
-        let dy = (Math.random() - 0.5) * 8;
+        let dx = (Math.random() - 0.5) * 2;
+        let dy = (Math.random() - 0.5) * 2;
         circleArray.push(new Circle(x, y, dx, dy, radius, `rgba(
             ${(Math.random() * 255)},
             ${(Math.random() * 255)},

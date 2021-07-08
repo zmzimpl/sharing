@@ -8,6 +8,8 @@ window.addEventListener('load', () => {
     canvas.height = window.innerHeight - 8;
     canvas.width = window.innerWidth - 6;
 
+    let circleArray = [];
+
     const mouse = {
         x: 0,
         y: 0
@@ -16,6 +18,12 @@ window.addEventListener('load', () => {
     window.addEventListener('mousemove', (evt) => {
         mouse.x = evt.x;
         mouse.y = evt.y;
+    });
+
+    window.addEventListener('resize', (evt) => {
+        canvas.height = window.innerHeight - 8;
+        canvas.width = window.innerWidth - 6;
+        generateCircle(1000);
     });
 
 
@@ -58,20 +66,25 @@ window.addEventListener('load', () => {
         this.draw();
     }
 
-    const circleArray = [];
-    for (let index = 0; index < 2000; index++) {
-        let radius = Math.random() * 5 + 1;
-        let x = Math.random() * (innerWidth - radius * 2) + radius;
-        let y = Math.random() * (innerHeight - radius * 2) + radius;
-        let dx = (Math.random() - 0.5) * 2;
-        let dy = (Math.random() - 0.5) * 2;
-        circleArray.push(new Circle(x, y, dx, dy, radius, `rgba(
-            ${(Math.random() * 255)},
-            ${(Math.random() * 255)},
-            ${(Math.random() * 255)},
-            ${Math.random()})`));
+    function generateCircle(amount) {
+        circleArray = [];
+        for (let index = 0; index < amount; index++) {
+            let radius = Math.random() * 5 + 1;
+            let x = Math.random() * (innerWidth - radius * 2) + radius;
+            let y = Math.random() * (innerHeight - radius * 2) + radius;
+            let dx = (Math.random() - 0.5) * 2;
+            let dy = (Math.random() - 0.5) * 2;
+            circleArray.push(new Circle(x, y, dx, dy, radius, `rgba(
+                ${(Math.random() * 255)},
+                ${(Math.random() * 255)},
+                ${(Math.random() * 255)},
+                ${Math.random() + 0.5})`));
+        }
+        console.log(circleArray);
     }
-    console.log(circleArray);
+
+    generateCircle(1000);
+
     function animation() {
         requestAnimationFrame(animation);
         ctx.clearRect(0, 0, innerWidth, innerHeight);

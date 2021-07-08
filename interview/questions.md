@@ -60,6 +60,13 @@ leetcode Hot 100
 ## 如何监听dom 节点的变化
 使用 MutationObserver 可以实现
 
+```js
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
+oberser.disconnect();
+
+```
+
 ## call, apply, bind 的区别，应用场景？
 - call, apply 是用于改变函数的上下文，在被调用时就会执行函数
 - bind 返回一个改变了上下文之后的函数
@@ -145,7 +152,7 @@ Function.prototype.myBind = function (context) {
 
 ### Typescript 中的 typeof 和 keyof
 
-```
+```ts
 export interface User {
   name: string;
   age: number;
@@ -154,23 +161,101 @@ const user: User = {
   name: 'zhangsan',
   age: 11
 }
+// 用法1
 type UserKeys = keyof typeof user;
-
 let userKeys: UserKeys = 'age';
+
+// keyof 用法2
+type UserKeys2 = keyof User;
+let userKeys: UserKeys2 = 'age';
+
 
 ```
 
 
-### Typescript 的 , , , , ，并集
+### Typescript 高阶用法
 
 - Omit<> 省略
-- Pick<> 子集
-- Partial<> 可选
-- Required<> 必填
+```ts
+  interface User {
+    name: string;
+    age: number;
+  }
+  type NewType = Omit<User, 'age'>
+  /** NewType 只有 name 属性 */
+```
+- Pick<> 挑选属性作为子集
+```ts
+interface User {
+  name: string;
+  age: number;
+  height: number;
+}
+type newType = Pick<User, 'age' | 'height'>
+  /** NewType 有 age 和 height 属性 */
+```
+- Partial<> 将类型变为可选
+```ts
+interface User {
+  name: string;
+  age: number;
+  height: number;
+}
+type PartialUser = Partial<User>;
+/**
+ * interface PartialUser {
+ *  name?: string;
+ *  age?: number;
+ *  height?: number;
+ * }
+ * /
+```
+- Required<> 将类型的树形变为必填
+```ts
+interface User {
+  name?: string;
+  age?: number;
+  height?: number;
+}
+type RequiredUser = Required<User>;
+/**
+ * interface RequiredUser {
+ *  name: string;
+ *  age: number;
+ *  height: number;
+ * }
+ * /
+```
 - ReadOnly<> 只读
-- 交叉类型 T & K
+- 交叉类型 T & K: 交叉合并
+```ts
+interface Foo {
+  foo: string;
+  name: string;
+}
+
+interface Bar {
+  bar: string;
+  name: string;
+}
+
+const sayHello = (obj: Foo & Bar) => { /* 可同时访问 obj.foo, obj.name, obj.bar */ };
+```
 - 联合类型 T | K
-- Extract<>
-- Exclude<>
+```ts
+interface Foo {
+  foo: string;
+  name: string;
+}
+
+interface Bar {
+  bar: string;
+  name: string;
+}
+
+const sayHello = (obj: Foo | Bar) => { /* 只能访问 obj.name */ };
+```
+- Extract<T, U>  提取
+- Exclude<T, U>  排除
 
 ### HTTPS 的缓存（强缓存、协议缓存）

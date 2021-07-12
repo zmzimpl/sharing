@@ -19,5 +19,5 @@ const c2 = new Child(['Tom', 'Jim']);
 console.log(c2.names);
 
 
-// 缺点，会调用两次父构造函数
+// 缺点，会调用两次父构造函数,可能会创建了多余的属性
 

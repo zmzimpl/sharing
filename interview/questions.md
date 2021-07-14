@@ -77,7 +77,7 @@ oberser.disconnect();
 ### 手写 call
 ```js
 Function.prototype.myCall = function(context) {
-    if (typeof this !== 'Function') {
+    if (typeof this !== 'function') {
         thrown new TypeError('Error');
     }
     context = context || window;
@@ -92,7 +92,7 @@ Function.prototype.myCall = function(context) {
 ### 手写 apply
 ```js
 Function.prototype.myApply = function(context) {
-    if (typeof this !== 'Function') {
+    if (typeof this !== 'function') {
         throw new TypeError('Error');
     }
     context = context || window;
@@ -119,10 +119,11 @@ Function.prototype.myBind = function (context) {
   // 返回一个函数
   return function F() {
     // 因为返回了一个函数，我们可以 new F()，所以需要判断
+    const bindArgs = [...arguments];
     if (this instanceof F) {
-      return new _this(...args, ...arguments)
+      return new _this(...args, ...bindArgs)
     }
-    return _this.apply(context, args.concat(...arguments))
+    return _this.apply(context, args.concat(bindArgs))
   }
 }
 ```
@@ -257,5 +258,8 @@ const sayHello = (obj: Foo | Bar) => { /* 只能访问 obj.name */ };
 ```
 - Extract<T, U>  提取
 - Exclude<T, U>  排除
+- NonNullable<T> 排除 undefined 类型
+- ReturnType<T> 返回 T 泛型的返回值
+
 
 ### HTTPS 的缓存（强缓存、协议缓存）

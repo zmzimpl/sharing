@@ -1,0 +1,47 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.switch-checkbox {
+  display: none;
+}
+
+.toggle--btn {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  height: 70px;
+  width: 125px;
+  border-radius: 70px;
+  border: 5px solid #1c1c1c;
+  background-color: #3c4145;
+  font-size: 1.4em;
+  cursor: pointer;
+  transition: all 350ms ease-in;
+}
+
+.toggle--btn::before {
+  background-color: #fff;
+  border: 5px solid #e3e3c7;
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  transition: all 0.5s;
+  content: "";
+  display: block;
+}
+
+.switch-checkbox:checked + .toggle--btn {
+  background-color: #9ee3fb;
+  border: 5px solid #86c3d7;
+}
+.switch-checkbox:checked + .toggle--btn::before {
+  left: 56px;
+}
